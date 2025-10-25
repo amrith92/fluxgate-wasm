@@ -1,0 +1,30 @@
+[package]
+name = "fluxgate_wasm_core"
+version = "0.1.0"
+edition = "2021"
+license = "Apache-2.0"
+authors = ["Fluxgate WASM Maintainers <dev@fluxgate.local>"]
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[features]
+default = ["yaml"]
+yaml = ["serde_yaml"]
+
+[dependencies]
+wasm-bindgen = { version = "0.2", features = ["serde-serialize"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+serde_yaml = { version = "0.9", optional = true }
+bincode = "1"
+thiserror = "1"
+indexmap = { version = "2", features = ["serde"] }
+js-sys = "0.3"
+
+[dependencies.siphasher]
+version = "0.3"
+default-features = false
+
+[dev-dependencies]
+wasm-bindgen-test = "0.3"
