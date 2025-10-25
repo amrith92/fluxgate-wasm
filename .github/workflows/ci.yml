@@ -26,12 +26,15 @@ jobs:
         uses: Swatinem/rust-cache@v2
 
       - name: Rustfmt
+        working-directory: ./core
         run: cargo fmt --all -- --check
 
       - name: Clippy
+        working-directory: ./core
         run: cargo clippy --workspace --all-targets --all-features -- -D warnings
 
       - name: Run tests
+        working-directory: ./core
         run: cargo test --workspace --all-features
 
       - name: Install cargo-llvm-cov
@@ -40,6 +43,7 @@ jobs:
           tool: cargo-llvm-cov
 
       - name: Generate coverage report
+        working-directory: ./core
         run: cargo llvm-cov --workspace --all-features --lcov --output-path target/lcov.info
 
       - name: Upload coverage artifact
