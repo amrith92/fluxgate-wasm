@@ -13,7 +13,7 @@ native project and leaves room for future probabilistic datastructures.
 
 ## Building
 
-1. Install Rust 1.77+ and `wasm-pack`.
+1. Install Rust 1.84 and `wasm-pack`.
 2. Build the WebAssembly package:
 
    ```bash
