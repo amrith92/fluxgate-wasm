@@ -107,13 +107,13 @@ jobs:
           path: .
 
       - name: Install dependencies
-        run: npm --prefix "$GITHUB_WORKSPACE" install --no-audit --no-fund
-        working-directory: .
+        working-directory: ${{ github.workspace }}
+        run: npm install --no-audit --no-fund
 
       - name: Type check & lint
-        run: npm --prefix "$GITHUB_WORKSPACE" run lint
-        working-directory: .
+        working-directory: ${{ github.workspace }}
+        run: npm run lint
 
       - name: Build TypeScript
-        run: npm --prefix "$GITHUB_WORKSPACE" run build
-        working-directory: .
+        working-directory: ${{ github.workspace }}
+        run: npm run build
