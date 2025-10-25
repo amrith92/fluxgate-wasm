@@ -107,10 +107,10 @@ jobs:
           path: .
 
       - name: Install dependencies
-        run: npm install --no-audit --no-fund
+        run: npm --prefix "$GITHUB_WORKSPACE" install --no-audit --no-fund
 
       - name: Type check & lint
-        run: npm run lint
+        run: npm --prefix "$GITHUB_WORKSPACE" run lint
 
       - name: Build TypeScript
-        run: npm run build
+        run: npm --prefix "$GITHUB_WORKSPACE" run build
