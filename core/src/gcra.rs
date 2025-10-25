@@ -42,6 +42,7 @@ impl TokenBucket {
         (false, Some(wait_ms.max(0.0) as u32))
     }
 
+    #[cfg(test)]
     pub fn remaining_tokens(&self) -> f64 {
         self.tokens
     }

@@ -2,7 +2,6 @@ use crate::error::{FluxgateError, Result};
 use crate::policy::PolicyMatcher;
 use indexmap::IndexMap;
 use serde::{Deserialize, Serialize};
-#[cfg(feature = "yaml")]
 
 #[derive(Clone, Debug, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]

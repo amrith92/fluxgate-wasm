@@ -90,7 +90,7 @@ impl PolicyMatcher {
                     .attrs
                     .as_ref()
                     .and_then(|attrs| attrs.get(&clause.key))
-                    .map(|v| value_to_string(v)),
+                    .map(value_to_string),
             };
 
             let capture = match_value(&clause.pattern, source_value)?;
