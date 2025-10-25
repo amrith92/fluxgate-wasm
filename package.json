@@ -1,0 +1,36 @@
+{
+  "name": "@fluxgate/wasm",
+  "version": "0.1.0",
+  "description": "Fluxgate rate limiter compiled to WebAssembly",
+  "type": "module",
+  "main": "js/node-loader.js",
+  "module": "js/index.ts",
+  "types": "js/types.ts",
+  "exports": {
+    ".": {
+      "types": "./js/types.ts",
+      "import": "./js/index.ts",
+      "require": "./js/node-loader.js"
+    },
+    "./worker": {
+      "types": "./js/types.ts",
+      "import": "./js/worker.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "build:wasm": "cd core && wasm-pack build --target nodejs --release --out-dir ../pkg",
+    "lint": "tsc --noEmit --pretty false"
+  },
+  "keywords": [
+    "rate-limiter",
+    "wasm",
+    "fluxgate"
+  ],
+  "author": "Fluxgate WASM Maintainers",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@types/node": "^24.9.1",
+    "typescript": "^5.4.0"
+  }
+}
