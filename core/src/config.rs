@@ -3,7 +3,6 @@ use crate::policy::PolicyMatcher;
 use indexmap::IndexMap;
 use serde::{Deserialize, Serialize};
 #[cfg(feature = "yaml")]
-use serde_yaml;
 
 #[derive(Clone, Debug, Serialize, Deserialize, Default)]
 #[serde(rename_all = "camelCase")]
