@@ -75,7 +75,10 @@ jobs:
           tool: wasm-pack
 
       - name: Build WASM package
-        run: wasm-pack build core --target nodejs --release --out-dir pkg
+        working-directory: core
+        run: |
+          rm -rf ../pkg
+          wasm-pack build --target nodejs --release --out-dir ../pkg
 
       - name: Upload WASM artifact
         uses: actions/upload-artifact@v4
