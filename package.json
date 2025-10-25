@@ -22,10 +22,15 @@
     "build:wasm": "cd core && wasm-pack build --target nodejs --release --out-dir ../pkg",
     "lint": "tsc --noEmit --pretty false"
   },
-  "keywords": ["rate-limiter", "wasm", "fluxgate"],
+  "keywords": [
+    "rate-limiter",
+    "wasm",
+    "fluxgate"
+  ],
   "author": "Fluxgate WASM Maintainers",
   "license": "Apache-2.0",
   "devDependencies": {
+    "@types/node": "^24.9.1",
     "typescript": "^5.4.0"
   }
 }
