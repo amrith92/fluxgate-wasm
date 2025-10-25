@@ -13,6 +13,8 @@ pub use limiter::Fluxgate;
 
 use wasm_bindgen::prelude::*;
 
+type JsResult<T> = std::result::Result<T, JsValue>;
+
 #[wasm_bindgen]
 pub struct WasmFluxgate {
     inner: Fluxgate,
@@ -21,7 +23,7 @@ pub struct WasmFluxgate {
 #[wasm_bindgen]
 impl WasmFluxgate {
     #[wasm_bindgen(constructor)]
-    pub fn new(init_json: String) -> Result<WasmFluxgate, JsValue> {
+    pub fn new(init_json: String) -> JsResult<WasmFluxgate> {
         let init: FluxgateInit = serde_json::from_str(&init_json)
             .map_err(|err| JsValue::from_str(&format!("init parse error: {err}")))?;
         Fluxgate::new(init)
@@ -30,7 +32,7 @@ impl WasmFluxgate {
     }
 
     #[wasm_bindgen]
-    pub fn check(&mut self, req_json: String) -> Result<String, JsValue> {
+    pub fn check(&mut self, req_json: String) -> JsResult<String> {
         let req: CheckRequest = serde_json::from_str(&req_json)
             .map_err(|err| JsValue::from_str(&format!("request parse error: {err}")))?;
         let decision = self.inner.check(req);
@@ -39,7 +41,7 @@ impl WasmFluxgate {
     }
 
     #[wasm_bindgen]
-    pub fn check_batch(&mut self, reqs_json: String) -> Result<String, JsValue> {
+    pub fn check_batch(&mut self, reqs_json: String) -> JsResult<String> {
         let reqs: Vec<CheckRequest> = serde_json::from_str(&reqs_json)
             .map_err(|err| JsValue::from_str(&format!("batch parse error: {err}")))?;
         let decisions = self.inner.check_batch(reqs);
@@ -53,7 +55,7 @@ impl WasmFluxgate {
     }
 
     #[wasm_bindgen]
-    pub fn reload(&mut self, init_json: String) -> Result<(), JsValue> {
+    pub fn reload(&mut self, init_json: String) -> JsResult<()> {
         let init: FluxgateInit = serde_json::from_str(&init_json)
             .map_err(|err| JsValue::from_str(&format!("reload parse error: {err}")))?;
         self.inner
@@ -62,21 +64,21 @@ impl WasmFluxgate {
     }
 
     #[wasm_bindgen]
-    pub fn snapshot(&self) -> Result<Vec<u8>, JsValue> {
+    pub fn snapshot(&self) -> JsResult<Vec<u8>> {
         self.inner
             .snapshot()
             .map_err(|err| JsValue::from_str(&err.to_string()))
     }
 
     #[wasm_bindgen]
-    pub fn restore(&mut self, bytes: &[u8]) -> Result<(), JsValue> {
+    pub fn restore(&mut self, bytes: &[u8]) -> JsResult<()> {
         self.inner
             .restore(bytes)
             .map_err(|err| JsValue::from_str(&err.to_string()))
     }
 
     #[wasm_bindgen]
-    pub fn metrics(&self) -> Result<String, JsValue> {
+    pub fn metrics(&self) -> JsResult<String> {
         let metrics = self.inner.metrics();
         serde_json::to_string(&metrics)
             .map_err(|err| JsValue::from_str(&format!("metrics serialize error: {err}")))
